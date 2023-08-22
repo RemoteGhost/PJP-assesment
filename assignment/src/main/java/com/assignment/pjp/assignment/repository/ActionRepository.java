@@ -1,6 +1,8 @@
 package com.assignment.pjp.assignment.repository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,25 @@ import lombok.Data;
 @Repository
 public class ActionRepository {
     private ArrayList<Action> actions = new ArrayList<Action>();
+
+    public Action add(Action action) {
+        this.actions.add(action);
+        return action;
+    }
+
+    public Action[] search(Integer val, Boolean asc) {
+        Stream<Action> actionStream = actions.stream().filter((Action a)->  a.getA().equals(val) || a.getB().equals(val) || a.getSum().equals(val));
+        if(asc) {
+            return  actionStream.sorted(Comparator.comparing(Action::getSum)).toArray(Action[]::new);
+        }
+        else return actionStream.sorted(Comparator.comparing(Action::getSum).reversed()).toArray(Action[]::new);
+    }
+
+    public Action[] getAllSorted(Boolean asc) {
+        if (asc) {
+            return actions.stream().sorted(Comparator.comparing(Action::getSum)).toArray(Action[]::new);
+        } else return actions.stream().sorted(Comparator.comparing(Action::getSum).reversed()).toArray(Action[]::new);
+    }
+
+
 }
