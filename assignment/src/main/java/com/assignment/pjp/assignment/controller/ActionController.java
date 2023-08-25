@@ -16,7 +16,7 @@ public class ActionController {
     @Autowired
     private ActionService actionService;
 
-
+    
     @GetMapping(value="/sum")
     public Action getMethodName(@RequestParam Integer a, @RequestParam Integer b) throws InvalidInputException {
         return actionService.newAdd(a, b);

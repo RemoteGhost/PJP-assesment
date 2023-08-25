@@ -1,7 +1,8 @@
 package com.assignment.pjp.assignment.repository;
 
-import java.util.ArrayList;
+
 import java.util.Comparator;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import lombok.Data;
 @Data
 @Repository
 public class ActionRepository {
-    private ArrayList<Action> actions = new ArrayList<Action>();
+    private final CopyOnWriteArrayList<Action> actions = new CopyOnWriteArrayList<Action>();
 
     public Action add(Action action) {
         this.actions.add(action);
